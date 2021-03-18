@@ -26,7 +26,7 @@
 - 숙제 올리는 법
    - 내 컴퓨터에서 나의 브랜치로 이동합니다.(이미 본인의 브랜치에 있다면 안해도 됩니다.) --> `git checkout <내 브랜치 이름>`
    - git add를 통해 숙제들을(변경 사항) 스테이지에 올려줍니다. --> `git add -A`
-   - git commit 메세지를 남깁니다. --> `git commit -m "첫째 주 숙제"
+   - git commit 메세지를 남깁니다. --> `git commit -m "첫째 주 숙제"`
    - github에 push 해줍니다. --> `git push`
 
 ## 스터디 기록
