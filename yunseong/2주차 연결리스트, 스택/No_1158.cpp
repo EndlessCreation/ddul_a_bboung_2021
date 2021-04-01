@@ -10,16 +10,16 @@ typedef struct Node
 
 int main(void)
 {
-	//¿©±â¼­ºÎÅÍ ¼±¾ð
+	//ì—¬ê¸°ì„œë¶€í„° ì„ ì–¸
 
-	Node *dummy = (Node*)malloc(sizeof(Node));	//Ã¹¹øÂ° ³ëµå¸¦ °¡¸®Å³ ³ëµå
-	Node *newNode = NULL;						//»õ·Î ¸¸µé¾îÁú ³ëµå
-	Node *cur = dummy;							//ÇöÀç ³ëµå (¿¬»êÀÌ ¼öÇàµÉ À§Ä¡)
+	Node *dummy = (Node*)malloc(sizeof(Node));	//ì²«ë²ˆì§¸ ë…¸ë“œë¥¼ ê°€ë¦¬í‚¬ ë…¸ë“œ
+	Node *newNode = NULL;				//ìƒˆë¡œ ë§Œë“¤ì–´ì§ˆ ë…¸ë“œ
+	Node *cur = dummy;				//í˜„ìž¬ ë…¸ë“œ (ì—°ì‚°ì´ ìˆ˜í–‰ë  ìœ„ì¹˜)
 
 	int n;
 	int k;
 
-	//¿©±â¼­ºÎÅÍ ÀúÀå
+	//ì—¬ê¸°ì„œë¶€í„° ì €ìž¥
 
 	cin >> n >> k;
 
@@ -27,36 +27,36 @@ int main(void)
 	{		
 		newNode = new Node();
 		newNode->data = i;	
-		newNode->next = NULL;					//»õ·Î¿î ¿ø¼Ò¸¦ »ý¼º
+		newNode->next = NULL;					//ìƒˆë¡œìš´ ì›ì†Œë¥¼ ìƒì„±
 
-		cur->next = newNode;					//ÇöÀç ³ëµå¸¦ »ý¼ºµÈ ³ëµå¿Í ¿¬°á
+		cur->next = newNode;					//í˜„ìž¬ ë…¸ë“œë¥¼ ìƒì„±ëœ ë…¸ë“œì™€ ì—°ê²°
 
 		if (i == n)
-			newNode->next = dummy->next;		//¸¶Áö¸· n¹ø ³ëµå¸¦ 1¹ø ³ëµå¿Í ¿¬°áÇÏ¿© ¿øÇü ¿¬°á ¸®½ºÆ® ¿Ï¼º
+			newNode->next = dummy->next;			//ë§ˆì§€ë§‰ në²ˆ ë…¸ë“œë¥¼ 1ë²ˆ ë…¸ë“œì™€ ì—°ê²°í•˜ì—¬ ì›í˜• ì—°ê²° ë¦¬ìŠ¤íŠ¸ ì™„ì„±
 
-		cur = newNode;							//ÇöÀç ³ëµå¸¦ »õ·Î ¸¸µé¾îÁø ³ëµå·Î º¯°æ
+		cur = newNode;						//í˜„ìž¬ ë…¸ë“œë¥¼ ìƒˆë¡œ ë§Œë“¤ì–´ì§„ ë…¸ë“œë¡œ ë³€ê²½
 	}
 
-	cur = dummy;								//ÇöÀç ³ëµå¸¦ dummy ³ëµå·Î º¯°æ
+	cur = dummy;							//í˜„ìž¬ ë…¸ë“œë¥¼ dummy ë…¸ë“œë¡œ ë³€ê²½
 
-	//¿©±âºÎÅÍ Ãâ·Â
+	//ì—¬ê¸°ë¶€í„° ì¶œë ¥
 
 	cout << "<";
 
 	for (int i = 1; i <= n; i++)
 	{
 		for(int j = 0; j<k-1; j++)
-			cur = cur->next;					//»èÁ¦ÇÒ À§Ä¡ÀÇ ÀÌÀüÀ§Ä¡·Î ÀÌµ¿
+			cur = cur->next;				//ì‚­ì œí•  ìœ„ì¹˜ì˜ ì´ì „ìœ„ì¹˜ë¡œ ì´ë™
 
-		dummy = cur->next;						//dummy¿¡ »èÁ¦ÇÒ ³ëµå¸¦ ´ã´Â´Ù.
-		cout << dummy->data;					//»èÁ¦ÇÒ data Ãâ·Â
+		dummy = cur->next;					//dummyì— ì‚­ì œí•  ë…¸ë“œë¥¼ ë‹´ëŠ”ë‹¤.
+		cout << dummy->data;					//ì‚­ì œí•  data ì¶œë ¥
 
 		if (i != n)
 			cout << ", ";
 		else
 			cout << ">";
 
-		cur->next = cur->next->next;			//»èÁ¦
+		cur->next = cur->next->next;				//ì‚­ì œ
 	}
 	
 
