@@ -10,14 +10,25 @@
 #include <string.h>
 #include <malloc.h>
 
+/*
+ * !! 구조체 선언에서 job 이라는 단어를 사용했는데, 무슨 의미인지 어떤 데이터를 포함하는 것인지 의미 파악이 매우 힘듭니다.
+ */ 
 struct job{
     int start;
     int end;
 };
 
+/*
+ * !! jobs는 그렇다 쳐도, jobV는 대체 무슨 의도일까? 전혀 가늠이 가지 않는 생뚱맞는 long 타입 포인터 변수를 선언했는데,
+ *    어떤 의도인지 변수 명칭으로 추정할 수 있도록 직관적인 명칭을 사용하거나, 아니면 로직을 주석으로 작성해두는 게 좋지 않을까?
+ */
 struct job *jobs;
 long *jobV;
 
+/*
+ * !! 언듯 함수 명칭을 보아서는 quick 정렬을 구현한 함수 같은데 정말 맞는지 의문의 듭니다.
+ *    게다가 재귀 함수를 사용했는데, recursive 함수는 특별한 경우 아니면 권장되지 않습니다.
+ */
 void qsort(int start, int end)
 {
 	long p=jobV[(start + end)>>1];
