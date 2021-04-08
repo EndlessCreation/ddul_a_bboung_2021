@@ -2,6 +2,7 @@
     "files.associations": {
         "list": "c",
         "vector": "c",
-        "xstring": "c"
+        "xstring": "c",
+        "deque": "cpp"
     }
 }
