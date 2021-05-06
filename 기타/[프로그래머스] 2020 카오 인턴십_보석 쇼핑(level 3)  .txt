@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+#include <set>
+#include <map>
+#include <utility>
+#include <vector>
+
+using namespace std;
+
+vector<int> solution(vector<string> gems) {
+    int size = gems.size(), kind = 0;
+    int start, end, start2, end2;
+    vector<int> answer;
+    vector<pair<int, int>> range;
+    set<string> count;
+    map<string, int> finder;
+    
+    count.insert(gems.begin(), gems.end());
+    kind = count.size();
+    if(kind == 1)
+    {
+        answer = {1, 1};
+        return answer;
+    }
+    
+    for(start = 0, end = 0; end < size; end++)
+    {
+        //cout << finder.size() << ' ' << start << ' ' << end << '\n';
+        if(finder.size() < kind)
+        {
+            auto it = finder.find(gems[end]);
+            if(it == finder.end())
+                finder.insert({gems[end], 1});
+            else
+                (it->second)++;
+        }
+        while(finder.size() == kind)
+        {
+            auto it = finder.find(gems[start++]);
+            if(it->second == 1)
+            {
+                finder.erase(it);
+                range.push_back({start, end+1});
+            }
+            else
+                (it->second)--;
+        }
+    }
+    
+    int min = 100000;
+    for(int i = 0; i < range.size(); i++)
+    {
+        //cout << i << " : " << range[i].first << ' ' << range[i].second << '\n';
+        if(min > range[i].second - range[i].first)
+        {
+            min = range[i].second - range[i].first;
+            start = range[i].first;
+            end = range[i].second;
+        }
+    }
+    answer = {start, end};
+    // cout << start << end << endl;
+    return answer;
+}
