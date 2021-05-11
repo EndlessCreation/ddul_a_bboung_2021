@@ -1,0 +1,51 @@
+#include <string>
+#include <vector>
+// #include <map>
+// #include <utility>
+#include <iostream>
+
+using namespace std;
+
+int solution(string s) {
+    long long answer = 0;
+    int length[10] = {4, 3, 3, 5, 4, 4, 3, 5, 5, 4};
+    //map<string, int> number = {{"ze", 0}, {"on", 1}, {"tw", 2}, {"th", 3}, {"fo", 4}, {"fi", 5}, {"si", 6}, {"se", 7}, {"ei", 8},  {"ni", 9}};
+    
+    for(int i = 0; i < s.length(); i++)
+    {
+        if( s[i] >= '0' && s[i] <= '9')
+            answer = answer*10 + s[i] - '0';
+        else
+        {
+            char sub[3] = {s[i], s[i+1], '\0'};
+            string str(sub);
+            int num = 0;
+            cout << sub << '\n';
+            
+            if(str == "ze")
+                num = 0;
+            else if(str == "on")
+                num = 1;
+            else if(str == "tw")
+                num = 2;
+            else if(str == "th")
+                num = 3;
+            else if(str == "fo")
+                num = 4;
+            else if(str == "fi")
+                num = 5;
+            else if(str == "si")
+                num = 6;
+            else if(str == "se")
+                num = 7;
+            else if(str == "ei")
+                num = 8;
+            else if(str == "ni")
+                num = 9;
+                    
+            answer = answer*10 + num;
+            i += length[num] - 1;
+        }
+    }
+    return answer;
+}

@@ -1,0 +1,75 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
+using namespace std;
+
+string solution(int n, int k, vector<string> cmd) {
+    string answer = "";
+    int now = k;
+    int cmd_leng = cmd.size();
+    vector<int> removeStack;
+    vector<int> data;
+    
+    for(int i = 0; i < n; i++)
+        data.push_back(i);
+    
+    for(int i = 0; i < cmd_leng; i++)
+    {
+        if(cmd[i][0] == 'D')
+        {
+            int num = stoi(cmd[i].substr(2));
+            now += num;
+            //cout << now << " moved D " << num << '\n';
+        }
+        if(cmd[i][0] == 'U')
+        {
+            int num = stoi(cmd[i].substr(2));
+            now -= num;
+            //cout << now << " moved U " << num << '\n';
+        }
+        if(cmd[i][0] == 'C')
+        {
+            removeStack.push_back(data[now]);
+            //cout << "remove " << now << '\n';
+            data.erase(data.begin() + now);
+            if(now >= data.size())
+                now--;
+        }
+        if(cmd[i][0] == 'Z')
+        {
+            int rollback = removeStack.back();
+            removeStack.pop_back();
+            
+            //cout << "rollback " << rollback << " at " << now << '\n';
+            for(int j = min(rollback, (int)data.size()); j >= 0; j--)
+            {
+                if(data[j] < rollback)
+                {
+                    data.insert(data.begin() + (j + 1), rollback);
+                    if(now >= j)
+                        now++;
+                    break;
+                }
+            }
+        }
+        // for(int j = 0; j < data.size(); j++)
+        // {
+        //     cout << data[j] << ' ';
+        // }
+        // cout << '\n';
+    }
+    for(int i = 0, differ = 0; i < n; i++)
+    {
+        if(data[i-differ] == i)
+            answer.append(1, 'O');
+        else
+        {
+            differ++;
+            answer.append(1, 'X');
+        }
+        //cout << answer << '\n';
+    }
+    return answer;
+}

@@ -1,0 +1,58 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int checkFar(vector<string> place)
+{
+    const int row = 5;
+    const int col = 5;
+    const int r[4] = {1, 0, -1, 0}, c[4] = {0, 1, 0, -1};
+    int visited[5][5] = {0};
+    for(int i = 0; i < row; i++)
+    {
+        for(int j = 0; j < col; j++)
+        {
+            if(place[i][j] == 'P')
+            {
+                 for(int l = 0; l < 4; l++)
+                 {
+                     int nextR = r[l];
+                     int nextC = c[l];
+                     if(i + nextR < 0 || i + nextR >= row || j + nextC < 0 || j + nextC >= col)
+                         continue;
+                     if(place[i + nextR][j + nextC] == 'P')
+                         return 0;
+                     else if(place[i + nextR][j + nextC] == 'O' && visited[i + nextR][j + nextC] == 0)
+                     {
+                         visited[i + nextR][j + nextC] = 1;
+                         int count = 0;
+                         
+                         for(int k = 0; k < 4; k++)
+                         {
+                             int nextR = r[k];
+                             int nextC = c[k];
+                             if(i + nextR < 0 || i + nextR >= row || j + nextC < 0 || j + nextC >= col)
+                                 continue;
+                             if(place[i + nextR][j + nextC] == 'P')
+                                 count++;
+                             if(count == 2)
+                                 return 0;
+                         }
+                     }
+                 }
+            }
+        }
+    }
+    return 1;
+}
+
+vector<int> solution(vector<vector<string>> places) {
+    vector<int> answer;
+    
+    for(int i = 0; i < 5; i++)
+    {
+        answer.push_back(checkFar(places[i]));
+    }
+    return answer;
+}
