@@ -7,7 +7,9 @@
 using namespace std;
 
 int num_of_case = 0, adjacent_count = 0;
-bool visited[25] = {false};
+// DFS 시 visited를 확인할 때 array 대신 BitMasking을 위한 int형 자료 사용
+// 백준 기준 속도 2배 빨라짐
+int visited_bit = 0; 
 char seats[25];
 vector<int> permutation(25, 0);
 
@@ -33,15 +35,16 @@ void countAdjacent(int index, int count)
         return;
 
     adjacent_count++;
-    visited[index] = true;
+    // index번 째 bit를 활성화시켜 방문했음을 표시
+    visited_bit |= 1 << index;
         
-    if(index + 5 <= SIZE2D - 1 && permutation[index + 5] == 1 && visited[index + 5] == false)
+    if(index + 5 <= SIZE2D - 1 && permutation[index + 5] == 1 && !(visited_bit & (1 << index + 5)))
         countAdjacent(index + SIZE, count + 1);
-    if(index - 5 >= 0 && permutation[index - 5] == 1 && visited[index - 5] == false)
+    if(index - 5 >= 0 && permutation[index - 5] == 1 && !(visited_bit & (1 << index - 5)))
         countAdjacent(index - SIZE, count + 1);
-    if((index % 5) < SIZE - 1 && permutation[index + 1] == 1 && visited[index + 1] == false)
+    if((index % 5) < SIZE - 1 && permutation[index + 1] == 1 && !(visited_bit & (1 << index + 1)))
         countAdjacent(index + 1, count + 1);
-    if((index % 5) > 0 && permutation[index - 1] == 1  && visited[index - 1] == false)
+    if((index % 5) > 0 && permutation[index - 1] == 1  && !(visited_bit & (1 << index - 1)))
         countAdjacent(index - 1, count + 1);
 }
 
@@ -63,7 +66,7 @@ int findFirstIndex()
 bool isAdjacent()
 {
     adjacent_count = 0;
-    memset(visited, false, sizeof(bool) * 25);
+    visited_bit = 0;
     countAdjacent(findFirstIndex(), 0);
     
     return (adjacent_count >= 7) ? true : false;
@@ -72,6 +75,7 @@ bool isAdjacent()
 /*
 * 25개의 위치중 7개를 선택하고 해당 위치를 기반으로 경우의 수를 게산하는 함수()
 * next_permutation 함수를 이용해 25Combination7 을 구현
+* 선택하는 것 자체로 백트래킹 기법을 사용하는데, c++ algorithm 라이브러리 함수로 해결.
 */
 void countNumOfCase()
 {
