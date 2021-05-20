@@ -14,7 +14,7 @@ void checkNextNode(int node, int cum_weight)
 	// cout << "node : " << node << ", cum_weight : " << cum_weight << "\n\n";
 	
     if(visited[node]) return;
-    visited[node] = true;
+        visited[node] = true;
 
     if(max_cum_weight < cum_weight)
     {
@@ -24,6 +24,17 @@ void checkNextNode(int node, int cum_weight)
 
 	for(int i = 0; i < edges[node].size(); i++)
         checkNextNode(edges[node][i].first, edges[node][i].second + cum_weight);
+    
+    	for(int i = 0; i < edges[node].size(); i++) 2800
+            checkNextNode(edges[node][i].first, edges[node][i].second + cum_weight);
+
+        for(int i = 0, size = edges[node].size(); i < size; i++) 3000
+            checkNextNode(edges[node][i].first, edges[node][i].second + cum_weight);
+
+        vector<pair<int,int>> next = edges[node]; 3200
+	    for(int i = 0; i < next.size(); i++)
+            checkNextNode(next[i].first, next[i].second + cum_weight);
+}
 }
 
 int main() {

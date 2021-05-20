@@ -11,12 +11,12 @@ int directC[4] = {0, 1, 0, -1};
 
 void countMoving(int row, int col, int count)
 {
-    if(alphabet_map[row][col] == 0 || alphabet_map[row][col] == '\n' || visited[alphabet_map[row][col] - 'A'] == true) return;
+    if( == 0 || alphabet_map[row][col] == '\n' || visited[alphabet_map[row][col] - 'A'] == true) return;
     visited[alphabet_map[row][col] - 'A'] = true;
 
     if(max_move < count)
         max_move = count;
-        
+    
     for(int i = 0; i < 4; i++)
         countMoving(row + directR[i], col + directC[i], count + 1);
     visited[alphabet_map[row][col] - 'A'] = false; 
